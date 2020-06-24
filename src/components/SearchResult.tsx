@@ -5,13 +5,13 @@ type Props = { item: Item };
 
 const SearchResult: React.FC<Props> = ({ item }) => {
   return (
-    <div className="card mb-3">
+    <div id={item.id} className="card mb-3">
       <div className="row no-gutters">
         <div className="col-md-2">
           <img
             src={item.volumeInfo.imageLinks?.thumbnail}
             className="card-img"
-            alt="..."
+            alt={item.volumeInfo.title}
           />
         </div>
         <div className="col-md-10">

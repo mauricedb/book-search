@@ -1,29 +1,33 @@
 import React, { Suspense } from "react";
+import { SWRConfig } from "swr";
 
 import Navbar from "./components/Navbar";
 import SearchCriteria from "./components/SearchCriteria";
 import Searcher from "./components/Searcher";
+import fetcher from "./utils/fetcher";
 
 function App() {
-  const [searching, setSearching] = React.useState(false);
-  const [query, setQuery] = React.useState("Douglas Adams");
+  const [query, setQuery] = React.useState("");
 
   return (
-    <div className="container">
-      <Navbar />
-      <SearchCriteria
-        search={async (query) => {
-          setSearching(true);
-          setQuery(query);
-          await new Promise((resolve) => setTimeout(resolve, 2000));
-          setSearching(false);
-        }}
-        disabled={searching}
-      />
-      <Suspense fallback={<div>Loading...</div>}>
-        <Searcher query={query} />
-      </Suspense>
-    </div>
+    <SWRConfig
+      value={{
+        fetcher,
+        suspense: true,
+      }}
+    >
+      <div className="container">
+        <Navbar />
+        <SearchCriteria
+          search={(query) => {
+            setQuery(query);
+          }}
+        />
+        <Suspense fallback={<div>Loading...</div>}>
+          {query && <Searcher query={query} />}
+        </Suspense>
+      </div>
+    </SWRConfig>
   );
 }
 

@@ -1,8 +1,8 @@
-export type QueryResult = {
+export interface QueryResult {
   kind: string;
   totalItems: number;
   items: Item[];
-};
+}
 
 export interface Item {
   kind: string;

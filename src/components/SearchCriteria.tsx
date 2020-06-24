@@ -2,10 +2,9 @@ import React from "react";
 
 type Props = {
   search: (value: string) => void;
-  disabled: boolean;
 };
 
-const SearchCriteria: React.FC<Props> = ({ search, disabled }) => {
+const SearchCriteria: React.FC<Props> = ({ search }) => {
   const [criteria, setCriteria] = React.useState("Douglas Adams");
 
   return (
@@ -20,13 +19,10 @@ const SearchCriteria: React.FC<Props> = ({ search, disabled }) => {
         autoFocus
         value={criteria}
         onChange={(e) => setCriteria(e.target.value)}
-        disabled={disabled}
         className="form-control shadow-none"
       />
       <div className="input-group-append">
-        <button disabled={disabled} className="btn btn-primary shadow-none">
-          Search
-        </button>
+        <button className="btn btn-primary shadow-none">Search</button>
       </div>
     </form>
   );

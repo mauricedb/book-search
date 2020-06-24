@@ -2,7 +2,6 @@ import React from "react";
 import useSWR from "swr";
 
 import { QueryResult } from "../types/books";
-import fetcher from "../utils/fetcher";
 import SearchResults from "./SearchResults";
 
 type Props = {
@@ -10,11 +9,15 @@ type Props = {
 };
 
 const Searcher: React.FC<Props> = ({ query }) => {
-  const { data } = useSWR<QueryResult>(
-    `https://www.googleapis.com/books/v1/volumes?q=inauthor:${query}&maxResults=25&langRestrict=en&xfilter=ebooksb`,
-    fetcher,
-    { suspense: true }
+  const { data, error } = useSWR<QueryResult>(
+    `https://www.googleapis.com/books/v1/volumes?q=inauthor:${query.replace(
+      / /g,
+      "+"
+    )}&maxResults=25&langRestrict=en&filter=ebooks`
   );
+
+  if (error) {
+  }
 
   return <SearchResults items={data?.items ?? []} />;
 };
