@@ -24,7 +24,7 @@ function App() {
           }}
         />
         <Suspense fallback={<div>Loading...</div>}>
-          {query && <Searcher query={query} />}
+          {query && <Searcher query={query} searchModifier="inauthor" />}
         </Suspense>
       </div>
     </SWRConfig>

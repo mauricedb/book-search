@@ -1,3 +1,5 @@
+export type SearchModifier = "none" | "intitle" | "inauthor" | "subject";
+
 export interface QueryResult {
   kind: string;
   totalItems: number;
