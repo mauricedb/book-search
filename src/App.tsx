@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import SearchCriteria from "./components/SearchCriteria";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   const [searching, setSearching] = React.useState(false);
@@ -16,6 +17,7 @@ function App() {
         }}
         disabled={searching}
       />
+      <SearchResults />
     </div>
   );
 }
