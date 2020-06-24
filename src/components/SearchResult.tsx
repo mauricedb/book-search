@@ -1,22 +1,27 @@
 import React from "react";
+import { Item } from "../types/books";
 
-const SearchResult: React.FC = () => {
+type Props = { item: Item };
+
+const SearchResult: React.FC<Props> = ({ item }) => {
   return (
     <div className="card mb-3">
       <div className="row no-gutters">
-        <div className="col-md-4">
-          <img src="..." className="card-img" alt="..." />
+        <div className="col-md-2">
+          <img
+            src={item.volumeInfo.imageLinks?.thumbnail}
+            className="card-img"
+            alt="..."
+          />
         </div>
-        <div className="col-md-8">
+        <div className="col-md-10">
           <div className="card-body">
-            <h5 className="card-title">Card title</h5>
+            <h5 className="card-title">{item.volumeInfo.title}</h5>
+            <p className="card-text">{item.searchInfo?.textSnippet}</p>
             <p className="card-text">
-              This is a wider card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-            <p className="card-text">
-              <small className="text-muted">Last updated 3 mins ago</small>
+              <small className="text-muted">
+                {item.volumeInfo.authors?.join(", ")}
+              </small>
             </p>
           </div>
         </div>

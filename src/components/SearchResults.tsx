@@ -1,12 +1,14 @@
 import React from "react";
 import SearchResult from "./SearchResult";
+import { Item } from "../types/books";
 
-const SearchResults: React.FC = () => {
-  const results = [1, 2, 3];
+type Props = { items: Item[] };
+
+const SearchResults: React.FC<Props> = ({ items }) => {
   return (
     <div>
-      {results.map((i) => (
-        <SearchResult key={i} />
+      {items.map((item) => (
+        <SearchResult key={item.id} item={item} />
       ))}
     </div>
   );

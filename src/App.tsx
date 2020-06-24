@@ -1,23 +1,28 @@
-import React from "react";
+import React, { Suspense } from "react";
+
 import Navbar from "./components/Navbar";
 import SearchCriteria from "./components/SearchCriteria";
-import SearchResults from "./components/SearchResults";
+import Searcher from "./components/Searcher";
 
 function App() {
   const [searching, setSearching] = React.useState(false);
+  const [query, setQuery] = React.useState("Douglas Adams");
 
   return (
     <div className="container">
       <Navbar />
       <SearchCriteria
-        search={async () => {
+        search={async (query) => {
           setSearching(true);
+          setQuery(query);
           await new Promise((resolve) => setTimeout(resolve, 2000));
           setSearching(false);
         }}
         disabled={searching}
       />
-      <SearchResults />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Searcher query={query} />
+      </Suspense>
     </div>
   );
 }
