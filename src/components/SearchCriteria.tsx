@@ -1,20 +1,28 @@
 import React from "react";
-import { SearchModifier, SearchInput } from "../types/books";
+import { useHistory, useParams } from "react-router-dom";
+import { SearchModifier } from "../types/search";
 
-type Props = {
-  search: (value: SearchInput) => void;
-};
+const SearchCriteria: React.FC = () => {
+  const history = useHistory();
+  const { query, field } = useParams();
 
-const SearchCriteria: React.FC<Props> = ({ search }) => {
-  const [criteria, setCriteria] = React.useState("Douglas Adams");
-  const [modifier, setModifier] = React.useState<SearchModifier>("intitle");
+  const [criteria, setCriteria] = React.useState(
+    () => query?.replace(/\+/g, " ") ?? "Douglas Adams"
+  );
+  const [modifier, setModifier] = React.useState<SearchModifier>(
+    () => field ?? "intitle"
+  );
 
   return (
     <form
       className="input-group"
       onSubmit={(e) => {
         e.preventDefault();
-        search({ criteria, modifier });
+        if (criteria) {
+          const query = criteria.replace(/ /g, "+");
+
+          history.push(`/search/${modifier}/${query}`);
+        }
       }}
     >
       <input
@@ -29,12 +37,14 @@ const SearchCriteria: React.FC<Props> = ({ search }) => {
           onChange={(e) => setModifier(e.target.value as SearchModifier)}
           className="form-control shadow-none"
         >
-          <option value="none">Everywhere</option>
+          <option value="everywhere">Everywhere</option>
           <option value="intitle">Title</option>
           <option value="inauthor">Author</option>
           <option value="subject">Subject</option>
         </select>
-        <button className="btn btn-primary shadow-none">Search</button>
+        <button className="btn btn-primary shadow-none" disabled={!criteria}>
+          Search
+        </button>
       </div>
     </form>
   );

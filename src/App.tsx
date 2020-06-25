@@ -1,19 +1,14 @@
 import React, { Suspense } from "react";
 import { SWRConfig } from "swr";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import SearchCriteria from "./components/SearchCriteria";
 import Searcher from "./components/Searcher";
 import fetcher from "./utils/fetcher";
-import { SearchInput } from "./types/books";
 
-function App() {
-  const [query, setQuery] = React.useState<SearchInput>({
-    criteria: "",
-    modifier: "none",
-  });
-
-  return (
+const App: React.FC = () => (
+  <BrowserRouter>
     <SWRConfig
       value={{
         fetcher,
@@ -22,20 +17,18 @@ function App() {
     >
       <div className="container">
         <Navbar />
-        <SearchCriteria
-          search={(query) => {
-            setQuery(query);
-          }}
-        />
+        <Route path={["/search/:field/:query", "/search/:query", "/"]}>
+          <SearchCriteria />
+        </Route>
         <Suspense fallback={<div>Loading...</div>}>
-          {query.criteria && (
-            <Searcher query={query.criteria} searchModifier={query.modifier} />
-          )}
+          <Route path={["/search/:field/:query", "/search/:query"]}>
+            <Searcher />
+          </Route>
         </Suspense>
       </div>
     </SWRConfig>
-  );
-}
+  </BrowserRouter>
+);
 
 App.displayName = "App";
 

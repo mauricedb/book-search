@@ -1,18 +1,14 @@
 import React from "react";
 import useSWR from "swr";
+import { useParams } from "react-router-dom";
 
-import { QueryResult, SearchModifier } from "../types/books";
+import { QueryResult } from "../types/books";
 import SearchResults from "./SearchResults";
 import getQueryPrefix from "../utils/getQueryPrefix";
 
-type Props = {
-  query: string;
-  searchModifier: SearchModifier;
-};
-
-const Searcher: React.FC<Props> = ({ query, searchModifier }) => {
-  const prefix = getQueryPrefix(searchModifier);
-  const q = `${prefix}${query.replace(/ /g, "+")}`;
+const Searcher: React.FC = () => {
+  const { query, field } = useParams();
+  const q = `${getQueryPrefix(field)}${query}`;
   const { data, error } = useSWR<QueryResult>(
     `https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=25&langRestrict=en&filter=ebooks`
   );

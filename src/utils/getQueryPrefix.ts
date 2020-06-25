@@ -1,9 +1,9 @@
-import { SearchModifier } from "../types/books";
+import { SearchModifier } from "../types/search";
 import assertNever from "./assertNever";
 
 const getQueryPrefix = (searchModifier: SearchModifier): string => {
   switch (searchModifier) {
-    case "none":
+    case "everywhere":
       return "";
     case "inauthor":
       return "inauthor:";
