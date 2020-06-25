@@ -3,27 +3,11 @@ import useSWR from "swr";
 
 import { QueryResult, SearchModifier } from "../types/books";
 import SearchResults from "./SearchResults";
-import { assertNever } from "../utils/assertNever";
+import getQueryPrefix from "../utils/getQueryPrefix";
 
 type Props = {
   query: string;
   searchModifier: SearchModifier;
-};
-
-const getQueryPrefix = (searchModifier: SearchModifier): string => {
-  switch (searchModifier) {
-    case "none":
-      return "";
-    case "inauthor":
-      return "inauthor:";
-    case "intitle":
-      return "intitle:";
-    case "subject":
-      return "subject:";
-    default:
-      assertNever(searchModifier);
-  }
-  return "";
 };
 
 const Searcher: React.FC<Props> = ({ query, searchModifier }) => {

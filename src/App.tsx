@@ -28,7 +28,7 @@ function App() {
           }}
         />
         <Suspense fallback={<div>Loading...</div>}>
-          {query && (
+          {query.criteria && (
             <Searcher query={query.criteria} searchModifier={query.modifier} />
           )}
         </Suspense>
