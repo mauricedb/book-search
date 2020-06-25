@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import SearchCriteria from "./components/SearchCriteria";
 import Searcher from "./components/Searcher";
 import fetcher from "./utils/fetcher";
+import Loading from "./components/Loading";
 
 const App: React.FC = () => (
   <BrowserRouter>
@@ -20,7 +21,7 @@ const App: React.FC = () => (
         <Route path={["/search/:field/:query", "/search/:query", "/"]}>
           <SearchCriteria />
         </Route>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Route path={["/search/:field/:query", "/search/:query"]}>
             <Searcher />
           </Route>
