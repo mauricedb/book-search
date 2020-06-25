@@ -5,9 +5,13 @@ import Navbar from "./components/Navbar";
 import SearchCriteria from "./components/SearchCriteria";
 import Searcher from "./components/Searcher";
 import fetcher from "./utils/fetcher";
+import { SearchInput } from "./types/books";
 
 function App() {
-  const [query, setQuery] = React.useState("");
+  const [query, setQuery] = React.useState<SearchInput>({
+    criteria: "",
+    modifier: "none",
+  });
 
   return (
     <SWRConfig
@@ -24,7 +28,9 @@ function App() {
           }}
         />
         <Suspense fallback={<div>Loading...</div>}>
-          {query && <Searcher query={query} searchModifier="inauthor" />}
+          {query && (
+            <Searcher query={query.criteria} searchModifier={query.modifier} />
+          )}
         </Suspense>
       </div>
     </SWRConfig>

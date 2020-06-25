@@ -1,5 +1,7 @@
 export type SearchModifier = "none" | "intitle" | "inauthor" | "subject";
 
+export type SearchInput = { criteria: string; modifier: SearchModifier };
+
 export interface QueryResult {
   kind: string;
   totalItems: number;
