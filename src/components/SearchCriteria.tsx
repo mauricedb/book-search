@@ -7,7 +7,7 @@ const SearchCriteria: React.FC = () => {
   const { query, field } = useParams();
 
   const [criteria, setCriteria] = React.useState(
-    () => query?.replace(/\+/g, " ") ?? "Douglas Adams"
+    () => query?.replace(/\+/g, " ") ?? "The Hitchhiker's Guide to the Galaxy" // "Douglas Adams"
   );
   const [modifier, setModifier] = React.useState<SearchModifier>(
     () => field ?? "intitle"
@@ -16,6 +16,7 @@ const SearchCriteria: React.FC = () => {
   return (
     <form
       className="input-group"
+      style={{ margin: "12px 0" }}
       onSubmit={(e) => {
         e.preventDefault();
         if (criteria) {
