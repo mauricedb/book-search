@@ -1,6 +1,6 @@
-import React from "react";
-import SearchResult from "./SearchResult";
-import { Item } from "../types/books";
+import React from 'react';
+import SearchResult from './SearchResult';
+import { Item } from '../types/books';
 
 type Props = { items: Item[] };
 
@@ -12,6 +12,6 @@ const SearchResults: React.FC<Props> = ({ items }) => (
   </div>
 );
 
-SearchResults.displayName = "SearchResults";
+SearchResults.displayName = 'SearchResults';
 
 export default SearchResults;

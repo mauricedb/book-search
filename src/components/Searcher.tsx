@@ -1,13 +1,14 @@
-import React from "react";
-import useSWR from "swr";
-import { useParams } from "react-router-dom";
+import React from 'react';
+import useSWR from 'swr';
+import { useParams } from 'react-router-dom';
 
-import { QueryResult } from "../types/books";
-import SearchResults from "./SearchResults";
-import getQueryPrefix from "../utils/getQueryPrefix";
+import { QueryResult } from '../types/books';
+import SearchResults from './SearchResults';
+import getQueryPrefix from '../utils/getQueryPrefix';
+import { SearchCriteriaParams } from '../types/search';
 
 const Searcher: React.FC = () => {
-  const { query, field } = useParams();
+  const { query, field } = useParams<SearchCriteriaParams>();
   const q = `${getQueryPrefix(field)}${query}`;
   const { data, error } = useSWR<QueryResult>(
     `https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=25&langRestrict=en&filter=ebooks`
@@ -19,6 +20,6 @@ const Searcher: React.FC = () => {
   return <SearchResults items={data?.items ?? []} />;
 };
 
-Searcher.displayName = "Searcher";
+Searcher.displayName = 'Searcher';
 
 export default React.memo(Searcher);
