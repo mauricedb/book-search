@@ -1,7 +1,7 @@
-import React from "react";
-import { htmlUnescape } from "escape-goat";
-import { Item } from "../types/books";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { htmlUnescape } from 'escape-goat';
+import { Item } from '../types/books';
+import { Link } from 'react-router-dom';
 
 type Props = { item: Item };
 
@@ -25,7 +25,7 @@ const SearchResult: React.FC<Props> = ({ item }) => {
                 <Link
                   to={`/search/intitle/${item.volumeInfo.title.replace(
                     / /g,
-                    "+"
+                    '+'
                   )}`}
                 >
                   {item.volumeInfo.title}
@@ -35,23 +35,23 @@ const SearchResult: React.FC<Props> = ({ item }) => {
                 className="pull-right"
                 onClick={() => setExpanded(!expanded)}
               >
-                {expanded ? "▲" : "▼"}
+                {expanded ? '▲' : '▼'}
               </button>
             </div>
             <p className="card-text">
               {htmlUnescape(
                 (expanded
                   ? item.volumeInfo.description
-                  : item.searchInfo?.textSnippet) ?? ""
+                  : item.searchInfo?.textSnippet) ?? ''
               )}
             </p>
             <p className="card-text">
               {item.volumeInfo.authors?.map((author, index) => (
                 <>
-                  <Link to={`/search/inauthor/${author.replace(/ /g, "+")}`}>
+                  <Link to={`/search/inauthor/${author.replace(/ /g, '+')}`}>
                     {author}
                   </Link>
-                  {index < (item.volumeInfo.authors?.length ?? 0) ? ", " : ""}
+                  {index < (item.volumeInfo.authors?.length ?? 0) ? ', ' : ''}
                 </>
               ))}
             </p>
@@ -60,7 +60,7 @@ const SearchResult: React.FC<Props> = ({ item }) => {
                 <p className="card-text">
                   <small className="text-muted">
                     Categories:&nbsp;
-                    {item.volumeInfo.categories?.join(", ")}
+                    {item.volumeInfo.categories?.join(', ')}
                   </small>
                 </p>
               </>
@@ -72,6 +72,6 @@ const SearchResult: React.FC<Props> = ({ item }) => {
   );
 };
 
-SearchResult.displayName = "SearchResult";
+SearchResult.displayName = 'SearchResult';
 
 export default SearchResult;
