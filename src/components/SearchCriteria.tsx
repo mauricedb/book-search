@@ -1,25 +1,26 @@
-import React from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { SearchModifier } from "../types/search";
+import React from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { SearchCriteriaParams, SearchModifier } from '../types/search';
 
 const SearchCriteria: React.FC = () => {
   const history = useHistory();
-  const { query, field } = useParams();
+  const { query, field } = useParams<SearchCriteriaParams>();
 
   const [criteria, setCriteria] = React.useState(
-    () => query?.replace(/\+/g, " ") ?? "Douglas Adams"
+    () => query?.replace(/\+/g, ' ') ?? "The Hitchhiker's Guide to the Galaxy" // "Douglas Adams"
   );
   const [modifier, setModifier] = React.useState<SearchModifier>(
-    () => field ?? "intitle"
+    () => field ?? 'intitle'
   );
 
   return (
     <form
       className="input-group"
+      style={{ margin: '12px 0' }}
       onSubmit={(e) => {
         e.preventDefault();
         if (criteria) {
-          const query = criteria.replace(/ /g, "+");
+          const query = criteria.replace(/ /g, '+');
 
           history.push(`/search/${modifier}/${query}`);
         }
@@ -50,6 +51,6 @@ const SearchCriteria: React.FC = () => {
   );
 };
 
-SearchCriteria.displayName = "SearchCriteria";
+SearchCriteria.displayName = 'SearchCriteria';
 
 export default SearchCriteria;

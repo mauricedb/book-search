@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Navbar: React.FC = () => (
   <nav className="navbar navbar-dark bg-primary">
@@ -8,6 +8,6 @@ const Navbar: React.FC = () => (
   </nav>
 );
 
-Navbar.displayName = "Navbar";
+Navbar.displayName = 'Navbar';
 
 export default Navbar;
