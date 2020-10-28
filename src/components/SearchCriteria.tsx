@@ -7,7 +7,9 @@ const SearchCriteria: React.FC = () => {
   const { query, field } = useParams<SearchCriteriaParams>();
 
   const [criteria, setCriteria] = React.useState(
-    () => query?.replace(/\+/g, ' ') ?? "The Hitchhiker's Guide to the Galaxy" // "Douglas Adams"
+    () =>
+      query?.replace(/\+/g, ' ').replace(/•/g, '.') ??
+      "The Hitchhiker's Guide to the Galaxy" // "Douglas Adams"
   );
   const [modifier, setModifier] = React.useState<SearchModifier>(
     () => field ?? 'intitle'
@@ -20,7 +22,7 @@ const SearchCriteria: React.FC = () => {
       onSubmit={(e) => {
         e.preventDefault();
         if (criteria) {
-          const query = criteria.replace(/ /g, '+');
+          const query = criteria.replace(/ /g, '+').replace(/\./g, '•');
 
           history.push(`/search/${modifier}/${query}`);
         }
