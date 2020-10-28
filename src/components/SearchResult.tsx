@@ -41,7 +41,7 @@ const SearchResult: React.FC<Props> = ({ item }) => {
             <p className="card-text">
               {htmlUnescape(
                 (expanded
-                  ? item.volumeInfo.description
+                  ? item.volumeInfo.description ?? item.searchInfo?.textSnippet
                   : item.searchInfo?.textSnippet) ?? ''
               )}
             </p>
