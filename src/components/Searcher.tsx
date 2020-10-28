@@ -10,12 +10,9 @@ import { SearchCriteriaParams } from '../types/search';
 const Searcher: React.FC = () => {
   const { query, field } = useParams<SearchCriteriaParams>();
   const q = `${getQueryPrefix(field)}${query}`;
-  const { data, error } = useSWR<QueryResult>(
+  const { data } = useSWR<QueryResult>(
     `https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=25&langRestrict=en&filter=ebooks`
   );
-
-  if (error) {
-  }
 
   return <SearchResults items={data?.items ?? []} />;
 };
