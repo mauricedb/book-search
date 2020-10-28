@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { htmlUnescape } from 'escape-goat';
 import { Item } from '../types/books';
 import { Link } from 'react-router-dom';
+import { encodeQuery } from '../utils/encodings';
 
 type Props = { item: Item };
 
@@ -48,7 +49,7 @@ const SearchResult: React.FC<Props> = ({ item }) => {
             <p className="card-text">
               {item.volumeInfo.authors?.map((author, index) => (
                 <Fragment key={index}>
-                  <Link to={`/search/inauthor/${author.replace(/ /g, '+')}`}>
+                  <Link to={`/search/inauthor/${encodeQuery(author)}`}>
                     {author}
                   </Link>
                   {index < (item.volumeInfo.authors?.length ?? 0) ? ', ' : ''}

@@ -1,15 +1,14 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { SearchCriteriaParams, SearchModifier } from '../types/search';
+import { encodeQuery, decodeQuery } from '../utils/encodings';
 
 const SearchCriteria: React.FC = () => {
   const history = useHistory();
   const { query, field } = useParams<SearchCriteriaParams>();
 
   const [criteria, setCriteria] = React.useState(
-    () =>
-      query?.replace(/\+/g, ' ').replace(/•/g, '.') ??
-      "The Hitchhiker's Guide to the Galaxy" // "Douglas Adams"
+    () => decodeQuery(query) ?? 'The Expanse'
   );
   const [modifier, setModifier] = React.useState<SearchModifier>(
     () => field ?? 'intitle'
@@ -22,7 +21,7 @@ const SearchCriteria: React.FC = () => {
       onSubmit={(e) => {
         e.preventDefault();
         if (criteria) {
-          const query = criteria.replace(/ /g, '+').replace(/\./g, '•');
+          const query = encodeQuery(criteria);
 
           history.push(`/search/${modifier}/${query}`);
         }
