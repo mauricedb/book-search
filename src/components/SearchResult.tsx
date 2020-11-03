@@ -52,7 +52,9 @@ const SearchResult: React.FC<Props> = ({ item }) => {
                   <Link to={`/search/inauthor/${encodeQuery(author)}`}>
                     {author}
                   </Link>
-                  {index < (item.volumeInfo.authors?.length ?? 0) ? ', ' : ''}
+                  {index + 1 < (item.volumeInfo.authors?.length ?? 0)
+                    ? ', '
+                    : ''}
                 </Fragment>
               ))}
             </p>
