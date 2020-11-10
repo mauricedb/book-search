@@ -32,12 +32,14 @@ const SearchCriteria: React.FC = () => {
         value={criteria}
         onChange={(e) => setCriteria(e.target.value)}
         className="form-control shadow-none"
+        aria-label="Query"
       />
       <div className="input-group-append">
         <select
           value={modifier}
           onChange={(e) => setModifier(e.target.value as SearchModifier)}
           className="form-control shadow-none"
+          aria-label="Search where"
         >
           <option value="everywhere">Everywhere</option>
           <option value="intitle">Title</option>
