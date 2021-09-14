@@ -31,23 +31,24 @@ const SearchCriteria: React.FC = () => {
         autoFocus
         value={criteria}
         onChange={(e) => setCriteria(e.target.value)}
-        className="form-control shadow-none"
+        className="form-control shadow-none  w-75"
       />
-      <div className="input-group-append">
-        <select
-          value={modifier}
-          onChange={(e) => setModifier(e.target.value as SearchModifier)}
-          className="form-control shadow-none"
-        >
-          <option value="everywhere">Everywhere</option>
-          <option value="intitle">Title</option>
-          <option value="inauthor">Author</option>
-          <option value="subject">Subject</option>
-        </select>
-        <button className="btn btn-primary shadow-none" disabled={!criteria}>
-          Search
-        </button>
-      </div>
+      <select
+        value={modifier}
+        onChange={(e) => setModifier(e.target.value as SearchModifier)}
+        className="form-select shadow-none"
+      >
+        <option value="everywhere">Everywhere</option>
+        <option value="intitle">Title</option>
+        <option value="inauthor">Author</option>
+        <option value="subject">Subject</option>
+      </select>
+      <button
+        className="btn btn-outline-primary shadow-none"
+        disabled={!criteria}
+      >
+        Search
+      </button>
     </form>
   );
 };
