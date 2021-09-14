@@ -41,12 +41,14 @@ const SearchCriteria: React.FC = () => {
         autoFocus
         value={criteria}
         onChange={(e) => setCriteria(e.target.value)}
-        className="form-control shadow-none  w-75"
+        className="form-control shadow-none w-75"
+        aria-label="Query"
       />
       <select
         value={modifier}
         onChange={(e) => setModifier(e.target.value as SearchModifier)}
         className="form-select shadow-none"
+        aria-label="Search where"
       >
         <option value="everywhere">Everywhere</option>
         <option value="intitle">Title</option>
