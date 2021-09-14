@@ -2,7 +2,7 @@ import React from 'react';
 import bug from './bug.png';
 
 type ErrorDisplayProps = {
-  error?: Error;
+  error: Error;
 };
 
 const ErrorDisplay: React.FC<ErrorDisplayProps> = ({ error }) => (
