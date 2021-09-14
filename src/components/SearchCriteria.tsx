@@ -14,6 +14,16 @@ const SearchCriteria: React.FC = () => {
     () => field ?? 'intitle'
   );
 
+  React.useEffect(() => {
+    const decodedQuery = decodeQuery(query);
+    if (decodedQuery) {
+      setCriteria(decodedQuery);
+    }
+    if (field) {
+      setModifier(field);
+    }
+  }, [query, field]);
+
   return (
     <form
       className="input-group"
