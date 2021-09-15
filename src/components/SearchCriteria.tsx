@@ -8,7 +8,7 @@ const SearchCriteria: React.FC = () => {
   const { query, field } = useParams<SearchCriteriaParams>();
 
   const [criteria, setCriteria] = React.useState(
-    () => decodeQuery(query) ?? 'The Expanse'
+    () => decodeQuery(query) ?? ''
   );
   const [modifier, setModifier] = React.useState<SearchModifier>(
     () => field ?? 'intitle'
