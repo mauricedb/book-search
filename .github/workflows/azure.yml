@@ -1,23 +1,23 @@
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: "Checkout the code"
+      - name: 'Checkout the code'
         uses: actions/checkout@v2
 
-      - name: "Build with node"
+      - name: 'Build with node'
         run: |
           npm install
           npm run build --if-exists
 
-      - name: "Deploy to Static Website on Azure Blob Storage"
+      - name: 'Deploy to Static Website on Azure Blob Storage'
         uses: tibor19/static-website-deploy@v1
         with:
-          enabled-static-website: "true"
-          folder: "build"
+          enabled-static-website: 'true'
+          folder: 'build'
           connection-string: ${{ secrets.CONNECTION_STRING }}
