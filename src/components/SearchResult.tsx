@@ -33,7 +33,7 @@ const SearchResult: React.FC<Props> = ({ item }) => {
                 </Link>
               </h5>
               <button
-                className="pull-right"
+                className="btn shadow-none pull-right"
                 onClick={() => setExpanded(!expanded)}
               >
                 {expanded ? '▲' : '▼'}
