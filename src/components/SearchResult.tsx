@@ -39,20 +39,22 @@ const SearchResult: React.FC<Props> = ({ item }) => {
                 {expanded ? '▲' : '▼'}
               </button>
             </div>
-            <p className="card-text">
+            <p className="card-text card-description">
               {htmlUnescape(
                 (expanded
                   ? item.volumeInfo.description ?? item.searchInfo?.textSnippet
                   : item.searchInfo?.textSnippet) ?? ''
               )}
             </p>
-            <p className="card-text">
+            <p className="card-text card-author">
               {item.volumeInfo.authors?.map((author, index) => (
                 <Fragment key={index}>
                   <Link to={`/search/inauthor/${encodeQuery(author)}`}>
                     {author}
                   </Link>
-                  {index < (item.volumeInfo.authors?.length ?? 0) ? ', ' : ''}
+                  {index + 1 < (item.volumeInfo.authors?.length ?? 0)
+                    ? ', '
+                    : ''}
                 </Fragment>
               ))}
             </p>
