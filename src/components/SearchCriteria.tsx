@@ -1,11 +1,11 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { SearchCriteriaParams, SearchModifier } from '../types/search';
 import { encodeQuery, decodeQuery } from '../utils/encodings';
 
 const SearchCriteria: React.FC = () => {
-  const history = useHistory();
-  const { query, field } = useParams<SearchCriteriaParams>();
+  const navigate = useNavigate();
+  const { query, field } = useParams() as SearchCriteriaParams;
 
   const [criteria, setCriteria] = React.useState(
     () => decodeQuery(query) ?? ''
@@ -33,7 +33,7 @@ const SearchCriteria: React.FC = () => {
         if (criteria) {
           const query = encodeQuery(criteria);
 
-          history.push(`/search/${modifier}/${query}`);
+          navigate(`/search/${modifier}/${query}`);
         }
       }}
     >

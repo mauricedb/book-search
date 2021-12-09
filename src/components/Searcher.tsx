@@ -8,7 +8,7 @@ import getQueryPrefix from '../utils/getQueryPrefix';
 import { SearchCriteriaParams } from '../types/search';
 
 const Searcher: React.FC = () => {
-  const { query, field } = useParams<SearchCriteriaParams>();
+  const { query, field } = useParams() as SearchCriteriaParams;
   const q = `${getQueryPrefix(field)}${query}`;
   const { data } = useSWR<QueryResult>(
     `https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=25&langRestrict=en&filter=ebooks`

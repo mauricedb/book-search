@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { SWRConfig } from 'swr';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import SearchCriteria from './components/SearchCriteria';
@@ -18,13 +18,14 @@ const App: React.FC = () => (
     >
       <div className="container">
         <Navbar />
-        <Route path={['/search/:field/:query', '/search/:query', '/']}>
-          <SearchCriteria />
-        </Route>
+        <Routes>
+          <Route path="/" element={<SearchCriteria />} />
+          <Route path="/search/:field/:query" element={<SearchCriteria />} />
+        </Routes>
         <Suspense fallback={<Loading />}>
-          <Route path={['/search/:field/:query', '/search/:query']}>
-            <Searcher />
-          </Route>
+          <Routes>
+            <Route path="/search/:field/:query" element={<Searcher />} />
+          </Routes>
         </Suspense>
       </div>
     </SWRConfig>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <title>Random numbers</title>
+  </head>
+  <body>
+    <h1>Random numbers</h1>
+    <div id="random-0">Random number 1:</div>
+    <div id="random-1">Random number 2:</div>
+    <button id="btn-generate">Generate</button>
+    <script>
+      document.getElementById('btn-generate').addEventListener('click', () => {
+        document.getElementById(
+          'random-0'
+        ).textContent = `Random number 1: ${Math.random()}`;
+        document.getElementById(
+          'random-1'
+        ).textContent = `Random number 2: ${Math.random()}`;
+      });
+    </script>
+  </body>
+</html>
